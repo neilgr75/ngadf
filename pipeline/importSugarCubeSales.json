@@ -19,7 +19,7 @@
 						"type": "JsonSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": false,
+							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -88,20 +88,18 @@
 									"type": "Decimal"
 								}
 							}
-						],
-						"collectionReference": "",
-						"mapComplexValuesToString": true
+						]
 					}
 				},
 				"inputs": [
 					{
-						"referenceName": "ABS_JSON_SugarCube",
+						"referenceName": "Json1",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable2",
+						"referenceName": "ASQL_dboSalesLoad",
 						"type": "DatasetReference"
 					}
 				]
