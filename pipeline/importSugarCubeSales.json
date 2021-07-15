@@ -53,7 +53,7 @@
 							{
 								"name": "runseqno",
 								"value": {
-									"value": "@activity('lookup runseqno').output",
+									"value": "@activity('lookup runseqno').output.firstRow.runseqno",
 									"type": "Expression"
 								}
 							}
@@ -78,19 +78,11 @@
 							{
 								"source": {
 									"path": "$['Month']"
-								},
-								"sink": {
-									"name": "SalesMonth",
-									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"path": "$['Company']"
-								},
-								"sink": {
-									"name": "Retailer",
-									"type": "String"
 								}
 							},
 							{
@@ -113,6 +105,16 @@
 							},
 							{
 								"source": {
+									"path": "$['Sales'][0]['Units']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Sales'][0]['Value']"
+								}
+							},
+							{
+								"source": {
 									"path": "$['runseqno']"
 								},
 								"sink": {
@@ -120,7 +122,8 @@
 									"type": "String"
 								}
 							}
-						]
+						],
+						"collectionReference": ""
 					}
 				},
 				"inputs": [
