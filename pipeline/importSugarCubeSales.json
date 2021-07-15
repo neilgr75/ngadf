@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "lookup runseqno",
-				"type": "Lookup",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -16,52 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select runseqid from trunseqid\n",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
-					},
-					"firstRowOnly": true
-				}
-			},
-			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "lookup runseqno",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
 						"type": "JsonSource",
-						"additionalColumns": [
-							{
-								"name": "runseqid",
-								"value": {
-									"value": "@activity('lookup runseqno').output.firstRow.runseqid",
-									"type": "Expression"
-								}
-							}
-						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
+							"recursive": false,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -129,18 +87,10 @@
 									"name": "SalesValueUSD",
 									"type": "Decimal"
 								}
-							},
-							{
-								"source": {
-									"path": "$['runseqid']"
-								},
-								"sink": {
-									"name": "runseqno",
-									"type": "String"
-								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
