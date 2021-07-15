@@ -1,0 +1,9 @@
+{
+	"name": "azADFNG",
+	"location": "ukwest",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "928d8206-fbdd-4cb0-8a2e-95088065f5c4",
+		"tenantId": "c3f6fa36-6416-4156-bad1-21efbe1cc501"
+	}
+}
