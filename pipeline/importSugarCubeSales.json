@@ -51,9 +51,9 @@
 						"type": "JsonSource",
 						"additionalColumns": [
 							{
-								"name": "runseqno",
+								"name": "runseqid",
 								"value": {
-									"value": "@activity('lookup runseqno').output.firstRow.runseqno",
+									"value": "@activity('lookup runseqno').output.firstRow.runseqid",
 									"type": "Expression"
 								}
 							}
@@ -77,6 +77,24 @@
 						"mappings": [
 							{
 								"source": {
+									"path": "$['Month']"
+								},
+								"sink": {
+									"name": "SalesMonth",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Company']"
+								},
+								"sink": {
+									"name": "Retailer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"path": "$['Sales'][0]['Product']"
 								},
 								"sink": {
@@ -95,7 +113,25 @@
 							},
 							{
 								"source": {
-									"path": "$['runseqno']"
+									"path": "$['Sales'][0]['Units']"
+								},
+								"sink": {
+									"name": "UnitsSold",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Sales'][0]['Value']"
+								},
+								"sink": {
+									"name": "SalesValueUSD",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['runseqid']"
 								},
 								"sink": {
 									"name": "runseqno",
