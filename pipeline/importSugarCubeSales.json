@@ -5,7 +5,14 @@
 			{
 				"name": "import sales data",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "lookup runseqno",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -17,10 +24,19 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "RunSeqNo",
+								"value": {
+									"value": "@activity('lookup runseqno').output",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "azure-data-factory-by-example-main/sampledata/sugarcube",
+							"wildcardFolderPath": "azure-data-factory-by-example-main/SampleData/SugarCube",
 							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
@@ -30,9 +46,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table dbo.Sales_Load",
-						"writeBehavior": "insert",
-						"disableMetricsCollection": false
+						"writeBehavior": "insert"
 					},
 					"enableStaging": false,
 					"translator": {
@@ -91,8 +105,19 @@
 									"name": "SalesValueUSD",
 									"type": "Decimal"
 								}
+							},
+							{
+								"source": {
+									"path": "$['RunSeqNo']"
+								},
+								"sink": {
+									"name": "runseqno",
+									"type": "Int32"
+								}
 							}
-						]
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": false
 					}
 				},
 				"inputs": [
@@ -107,6 +132,30 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "lookup runseqno",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"folder": {
