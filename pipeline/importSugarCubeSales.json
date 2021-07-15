@@ -26,9 +26,9 @@
 						"type": "JsonSource",
 						"additionalColumns": [
 							{
-								"name": "RunSeqNo",
+								"name": "runseqid",
 								"value": {
-									"value": "@activity('lookup runseqno').output",
+									"value": "@activity('lookup runseqno').runseqid",
 									"type": "Expression"
 								}
 							}
@@ -54,24 +54,6 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['Month']"
-								},
-								"sink": {
-									"name": "SalesMonth",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['Company']"
-								},
-								"sink": {
-									"name": "Retailer",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['Sales'][0]['Product']"
 								},
 								"sink": {
@@ -90,25 +72,7 @@
 							},
 							{
 								"source": {
-									"path": "$['Sales'][0]['Units']"
-								},
-								"sink": {
-									"name": "UnitsSold",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['Sales'][0]['Value']"
-								},
-								"sink": {
-									"name": "SalesValueUSD",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"path": "$['RunSeqNo']"
+									"path": "$['runseqid']"
 								},
 								"sink": {
 									"name": "runseqno",
@@ -117,7 +81,7 @@
 							}
 						],
 						"collectionReference": "",
-						"mapComplexValuesToString": false
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
@@ -128,7 +92,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ASQL_dboSalesLoad",
+						"referenceName": "AzureSqlTable2",
 						"type": "DatasetReference"
 					}
 				]
@@ -148,6 +112,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select runseqid from trunseqid\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
