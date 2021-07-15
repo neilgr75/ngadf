@@ -107,6 +107,15 @@
 									"name": "SalesValueUSD",
 									"type": "Decimal"
 								}
+							},
+							{
+								"source": {
+									"path": "$['runseqid']"
+								},
+								"sink": {
+									"name": "runseqno",
+									"type": "String"
+								}
 							}
 						]
 					}
