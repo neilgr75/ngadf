@@ -8,6 +8,14 @@
 		"parameters": {
 			"Container": {
 				"type": "string"
+			},
+			"Directory": {
+				"type": "string",
+				"defaultValue": "."
+			},
+			"File": {
+				"type": "string",
+				"defaultValue": "."
 			}
 		},
 		"folder": {
