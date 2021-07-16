@@ -1,0 +1,10 @@
+{
+	"name": "adfkv",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://adftest-kv.vault.azure.net/"
+		}
+	}
+}
