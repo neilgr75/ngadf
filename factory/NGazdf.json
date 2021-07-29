@@ -1,0 +1,9 @@
+{
+	"name": "NGazdf",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e3116881-1639-4760-8360-ad7d0b9d2980",
+		"tenantId": "c3f6fa36-6416-4156-bad1-21efbe1cc501"
+	}
+}
