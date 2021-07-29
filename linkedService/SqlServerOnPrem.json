@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=86.8.130.217;initial catalog=test;user id=local",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxZTQyODVjNC1jNTgzLTRmYjAtYjM1NS1mNzNiM2FiMTY5NzkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;data source=localhost;initial catalog=test;user id=local",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhNTUzZDFjYy0xNDI2LTQwOTUtODE1MS1kNjliMDdiNDg5ZjYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "selfhostedIR",
