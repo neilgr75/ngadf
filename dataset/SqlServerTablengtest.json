@@ -1,0 +1,26 @@
+{
+	"name": "SqlServerTablengtest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerOnPrem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "col1",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "col2",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ngtest"
+		}
+	}
+}

@@ -1,10 +1,6 @@
 {
 	"name": "ABS_CSV_CandyShack",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"folder": {
 			"name": "chapter3"
 		},

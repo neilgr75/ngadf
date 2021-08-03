@@ -1,10 +1,6 @@
 {
 	"name": "SourceDataset_ilx",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"folder": {
 			"name": "chapter2"
 		},

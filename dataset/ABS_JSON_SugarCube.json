@@ -1,10 +1,6 @@
 {
 	"name": "ABS_JSON_SugarCube",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"folder": {
 			"name": "chapter3"
 		},

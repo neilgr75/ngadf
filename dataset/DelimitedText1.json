@@ -1,14 +1,16 @@
 {
-	"name": "ABS_CSV",
+	"name": "DelimitedText1",
 	"properties": {
-		"folder": {
-			"name": "chapter5"
+		"linkedServiceName": {
+			"referenceName": "adfbyexamplesa",
+			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "ng.csv",
 				"container": "sampledata"
 			},
 			"columnDelimiter": ",",
@@ -16,6 +18,15 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "col1",
+				"type": "String"
+			},
+			{
+				"name": "col2",
+				"type": "String"
+			}
+		]
 	}
 }
