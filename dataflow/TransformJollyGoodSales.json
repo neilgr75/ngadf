@@ -3,10 +3,18 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "JollyGoodSalesSource",
+						"type": "DatasetReference"
+					},
+					"name": "JollyGoodSales"
+				}
+			],
 			"sinks": [],
 			"transformations": [],
-			"script": ""
+			"script": "source(output(\n\t\tPeriod as date,\n\t\tProduct as string,\n\t\t{Unit Price} as double,\n\t\tCurrency as string,\n\t\t{Units Sold} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> JollyGoodSales"
 		}
 	}
 }
