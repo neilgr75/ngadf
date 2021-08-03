@@ -5,6 +5,9 @@
 			"referenceName": "adfbyexamplesa",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "chapter7"
+		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {

@@ -5,6 +5,9 @@
 			"referenceName": "AzureSqlDatabasengtest",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "chapter7"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
