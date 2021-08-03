@@ -10,15 +10,28 @@
 						"type": "DatasetReference"
 					},
 					"name": "JollyGoodSales"
+				},
+				{
+					"linkedService": {
+						"referenceName": "adfbyexamplesa",
+						"type": "LinkedServiceReference"
+					},
+					"name": "ExchangeRates"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
 					"name": "TransformJollyGoodSalesFilter"
+				},
+				{
+					"name": "RatesToUSD"
+				},
+				{
+					"name": "LookupExchangeRate"
 				}
 			],
-			"script": "source(output(\n\t\tPeriod as date,\n\t\tProduct as string,\n\t\t{Unit Price} as double,\n\t\tCurrency as string,\n\t\t{Units Sold} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> JollyGoodSales\nJollyGoodSales filter(Product != 'Month Total') ~> TransformJollyGoodSalesFilter"
+			"script": "source(output(\n\t\tPeriod as date,\n\t\tProduct as string,\n\t\t{Unit Price} as double,\n\t\tCurrency as string,\n\t\t{Units Sold} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> JollyGoodSales\nsource(output(\n\t\tFromCurrency as string,\n\t\tToCurrency as string,\n\t\tDate as date,\n\t\tExchangeRate as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'excel',\n\tcontainer: 'sampledata',\n\tfolderPath: 'azure-data-factory-by-example-main/SampleData',\n\tfileName: 'ExchangeRates.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> ExchangeRates\nJollyGoodSales filter(Product != 'Month Total') ~> TransformJollyGoodSalesFilter\nExchangeRates filter(ToCurrency=='USD') ~> RatesToUSD\nTransformJollyGoodSalesFilter, RatesToUSD lookup(Currency == FromCurrency\n\t&& Period == Date,\n\tmultiple: true,\n\tbroadcast: 'auto')~> LookupExchangeRate"
 		}
 	}
 }
