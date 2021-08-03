@@ -1,0 +1,16 @@
+{
+	"name": "AzureSqlSalesLoad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabasengtest",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SalesLoad"
+		}
+	}
+}
