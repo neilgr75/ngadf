@@ -1,6 +1,9 @@
 {
 	"name": "TransformJollyGoodSales",
 	"properties": {
+		"folder": {
+			"name": "chapter7"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

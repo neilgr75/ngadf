@@ -1,0 +1,48 @@
+{
+	"name": "UpdateProduct",
+	"properties": {
+		"folder": {
+			"name": "chapter7"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Sales",
+						"type": "DatasetReference"
+					},
+					"name": "Sales"
+				},
+				{
+					"dataset": {
+						"referenceName": "Product",
+						"type": "DatasetReference"
+					},
+					"name": "Products"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Product",
+						"type": "DatasetReference"
+					},
+					"name": "dboProductSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedProductFeatures"
+				},
+				{
+					"name": "EliminateDuplicates"
+				},
+				{
+					"name": "NewRowsOnly"
+				}
+			],
+			"script": "source(output(\n\t\tSalesMonth as date,\n\t\tProduct as string,\n\t\tUnitsSold as integer,\n\t\tSalesValueUSD as double,\n\t\tRetailer as string,\n\t\tRunSeqNo as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Sales\nsource(output(\n\t\tProduct as string,\n\t\tProductName as string,\n\t\tWeightInOunces as decimal(19,2),\n\t\tWeightInGrams as decimal(19,2)\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Products\nSales derive(ProductName = trim(left(Product, length(Product)-length(:WeightString))),\n\t\tWeightInOunces = toFloat(replace(:WeightString, :WeightUnit,''))/iif(:WeightUnit=='g',28.3495, 1.0),\n\t\tWeightInGrams = toFloat(replace(:WeightString, :WeightUnit,''))/iif(:WeightUnit=='oz',28.3495, 1.0),\n\t\tWeightString := right(Product, locate(' ', reverse(Product)) -1)\r\n,\n\t\tWeightUnit := iif(endsWith(Product, 'oz'),'oz','g')) ~> DerivedProductFeatures\nDerivedProductFeatures aggregate(groupBy(Product),\n\tProductName = first(ProductName),\n\t\teach(match(startsWith(name, 'Weight')), $$ = first($$))) ~> EliminateDuplicates\nEliminateDuplicates, Products exists(EliminateDuplicates@Product == Products@Product,\n\tnegate:true,\n\tbroadcast: 'auto')~> NewRowsOnly\nNewRowsOnly sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tProduct as string,\n\t\tProductName as string,\n\t\tWeightInOunces as decimal(19,2),\n\t\tWeightInGrams as decimal(19,2)\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> dboProductSink"
+		}
+	}
+}
