@@ -1,0 +1,44 @@
+{
+	"name": "pQuerychap9",
+	"properties": {
+		"activities": [
+			{
+				"name": "Power Query chap 9",
+				"type": "ExecuteWranglingDataflow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "powerquerychap9",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"sinks": {
+						"UserQuery": {
+							"name": "SinkSalesLoad",
+							"dataset": {
+								"referenceName": "SalesLoad",
+								"type": "DatasetReference"
+							},
+							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tSalesMonth as date,\n\t\tProduct as string,\n\t\tUnitsSold as integer,\n\t\tSalesValueUSD as double,\n\t\tRetailer as string,\n\t\tRunSeqNo as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tProduct,\n\t\tSalesValueUSD,\n\t\tSalesMonth = {Start of month},\n\t\tRetailer\n\t)) ~> SinkSalesLoad"
+						}
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "chapter9"
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,44 @@
+{
+	"name": "SalesLoad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabasengtest",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SalesMonth",
+				"type": "date"
+			},
+			{
+				"name": "Product",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UnitsSold",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SalesValueUSD",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Retailer",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RunSeqNo",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SalesLoad"
+		}
+	}
+}
