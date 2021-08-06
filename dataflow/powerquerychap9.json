@@ -1,0 +1,13 @@
+{
+	"name": "powerquerychap9",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"folder": {
+			"name": "chapter9"
+		},
+		"typeProperties": {
+			"sources": [],
+			"sinks": []
+		}
+	}
+}
