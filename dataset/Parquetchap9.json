@@ -1,0 +1,42 @@
+{
+	"name": "Parquetchap9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adfbyexamplesa",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "HandyCandy.parquet",
+				"folderPath": "datalake",
+				"container": "output"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "TransactionId",
+				"type": "UTF8"
+			},
+			{
+				"name": "TransactionDate",
+				"type": "UTF8"
+			},
+			{
+				"name": "StoreId",
+				"type": "UTF8"
+			},
+			{
+				"name": "Product",
+				"type": "UTF8"
+			},
+			{
+				"name": "Price",
+				"type": "DOUBLE"
+			}
+		]
+	}
+}
