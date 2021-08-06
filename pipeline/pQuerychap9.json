@@ -25,12 +25,12 @@
 					},
 					"sinks": {
 						"UserQuery": {
-							"name": "SinkSalesLoad",
+							"name": "Sinksalesloadchap9",
 							"dataset": {
-								"referenceName": "SalesLoad",
+								"referenceName": "salesloadchap9",
 								"type": "DatasetReference"
 							},
-							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tSalesMonth as date,\n\t\tProduct as string,\n\t\tUnitsSold as integer,\n\t\tSalesValueUSD as double,\n\t\tRetailer as string,\n\t\tRunSeqNo as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tProduct,\n\t\tSalesValueUSD,\n\t\tSalesMonth = {Start of month},\n\t\tRetailer\n\t)) ~> SinkSalesLoad"
+							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesMonth as date,\n\t\tProduct as string,\n\t\tUnitsSold as integer,\n\t\tSalesValueUSD as double,\n\t\tRetailer as string,\n\t\tRunSeqNo as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tProduct,\n\t\tSalesValueUSD,\n\t\tUnitsSold = UnitSold,\n\t\tSalesMonth = TransactionDate\n\t)) ~> Sinksalesloadchap9"
 						}
 					}
 				}
