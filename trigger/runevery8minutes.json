@@ -1,0 +1,24 @@
+{
+	"name": "runevery8minutes",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyPipeline_4tg",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 8,
+				"startTime": "2021-08-10T15:01:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
